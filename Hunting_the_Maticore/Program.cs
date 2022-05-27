@@ -44,21 +44,6 @@ do
     playGame = playAgain();
 } while (playGame);
 
-int rangeSetting()
-{
-    Console.Write("Player 2: Enter the desired cannon range: ");
-    int cannonRange = Convert.ToInt32(Console.ReadLine());
-    return cannonRange;
-    //set color place holder
-    
-
-}
-
-
-
-
-
-
 //-----Methods-----
 
 //Status menu method
@@ -101,6 +86,16 @@ int cannonInfo(int damage, int round)
 
 }
 
+
+int rangeSetting()
+{
+    Console.Write("Player 2: Enter the desired cannon range: ");
+    int cannonRange = Convert.ToInt32(Console.ReadLine());
+    return cannonRange;
+    //set color place holder
+
+
+}
 
 // Replay game method
 bool playAgain()
