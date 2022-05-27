@@ -11,7 +11,7 @@ do
     int manticore = 10;
     int city = 15;
     int round = 1;
-    int damage = 0;
+    int damage = 0;      
     string separator = "_________________________________________________________________________________";
 
    //Player 1 sets up the game distance for the Manticore
@@ -30,6 +30,9 @@ do
         // Pass to Cannon method return expected damage
         int cannonFire = cannonInfo(damage, round);
 
+        // Pass to rangeSetting method
+        int targetRange = rangeSetting();
+
         //Start of place holder (REMOVE)
         city -= 5;
         round++;
@@ -40,6 +43,16 @@ do
 
     playGame = playAgain();
 } while (playGame);
+
+int rangeSetting()
+{
+    Console.Write("Player 2: Enter the desired cannon range: ");
+    int cannonRange = Convert.ToInt32(Console.ReadLine());
+    return cannonRange;
+    //set color place holder
+    
+
+}
 
 
 
