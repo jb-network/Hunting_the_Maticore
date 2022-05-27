@@ -7,6 +7,17 @@ bool playGame = true;
 
 do
 {
+    //intial settings for a new game
+    int Manticore = 10;
+    int City = 15;
+    int Round = 1;
+    int test;
+    string separator = "_________________________________________________________________________________";
+
+   //Player 1 sets up the game distance for the Manticore
+    int attackDistance = gameSteup(separator);
+    Console.WriteLine(attackDistance);
+
 
     Console.WriteLine("Test game");
 
@@ -14,7 +25,30 @@ do
 } while (playGame);
 
 
+//-----Methods-----
 
+//Game set up method
+int gameSteup(string separator)
+{
+    int attackRange = -1;
+    Console.WriteLine(separator+"\nWelcome to Hunting the Manticore!\n"+separator);
+        
+    while (attackRange < 0 || attackRange > 100)
+    {
+        Console.Write("Player 1: Please provide the Manticore's distance from the city (0 to 100): ");
+        attackRange = Convert.ToInt32(Console.ReadLine());
+
+        if (attackRange < 0 || attackRange > 100) Console.WriteLine($"\nThe number you provided: {attackRange} is out of range. Please try again.");
+      
+    }
+    Console.WriteLine($"\nThe Manticore attack range is set to: {attackRange} \nPress any key to clear the screen and start the attack!\n" + separator);
+    Console.ReadKey();
+    Console.Clear();
+    return attackRange;
+}
+
+
+// Replay game method
 bool playAgain()
 {
     int replayStatus = 0;
