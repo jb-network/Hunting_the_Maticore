@@ -74,7 +74,7 @@ int gameSteup(string separator)
     return attackRange;
 }
 
-//Cannon fire method
+//Cannon fire method, returned damage to remove health from Manticore
 int cannonInfo(int damage, int round)
 {
     //Required exercise modifiers to set cannon damage
