@@ -11,13 +11,13 @@ do
     int manticore = 10;
     int city = 15;
     int round = 1;
-    int test;
+    int damage = 0;
     string separator = "_________________________________________________________________________________";
 
    //Player 1 sets up the game distance for the Manticore
     int attackDistance = gameSteup(separator);
     
-    Console.WriteLine("Player 2, it is your turn.");
+    Console.WriteLine("Player 2: It is your turn.");
 
 
     while (city > 0 && manticore > 0)
@@ -27,16 +27,21 @@ do
         // Pass to Status menu method
         statusMenu(round, city, manticore);
 
-        //remove when ready
-        city = 0;
+        // Pass to Cannon method return expected damage
+        int cannonFire = cannonInfo(damage, round);
 
-
+        //Start of place holder (REMOVE)
+        city -= 5;
+        round++;
+        //End of place holder (REMOVE)
     }
     
     //add action once while loop is met
 
     playGame = playAgain();
 } while (playGame);
+
+
 
 
 
@@ -57,7 +62,7 @@ int gameSteup(string separator)
         
     while (attackRange < 0 || attackRange > 100)
     {
-        Console.Write("Player 1, how far away from the city do you want to station the Manticore? (0 to 100): ");
+        Console.Write("Player 1: How far away from the city do you want to station the Manticore? (0 to 100): ");
         attackRange = Convert.ToInt32(Console.ReadLine());
 
         if (attackRange < 0 || attackRange > 100) Console.WriteLine($"\nThe number you provided: {attackRange} is out of range. Please try again.");
@@ -67,6 +72,20 @@ int gameSteup(string separator)
     Console.ReadKey();
     Console.Clear();
     return attackRange;
+}
+
+//Cannon fire method
+int cannonInfo(int damage, int round)
+{
+    //Required exercise modifiers to set cannon damage
+    if (round % 3 == 0 && round % 5 == 0) damage = 10;
+    else if (round % 3 == 0 || round % 5 == 0) damage = 3;
+    else damage = 1;
+
+
+    Console.WriteLine($"The cannon is expected to deal {damage} damage this round.");
+    return damage;
+
 }
 
 
