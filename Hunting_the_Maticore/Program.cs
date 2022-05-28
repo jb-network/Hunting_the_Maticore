@@ -39,9 +39,6 @@ do
     playGame = playAgain();
 } while (playGame);
 
-
-
-
 //-----Methods-----
 
 //Status menu method
@@ -84,19 +81,18 @@ int cannonInfo(int damage, int round)
     Console.WriteLine($"The cannon is expected to deal {damage} damage this round.");
     
     return damage;
-
 }
 
-
+//Player 2 guess range 
 int rangeSetting()
 {
     Console.Write("Player 2: Enter the desired cannon range: ");
     int cannonRange = Convert.ToInt32(Console.ReadLine());
     return cannonRange;
-    //set color place holder
-
-
+    
 }
+
+//Status of shot taken (higher, lower, or correct guesses)
 int fireInfo(int targetRange, int attackDistance, int cannonFire)
 {
     int damage = 0;
@@ -117,19 +113,26 @@ int fireInfo(int targetRange, int attackDistance, int cannonFire)
     }
 }
 
+//End game statment based on city and manticore health
 void winCondition(int manticore, int city, string separator)
 {
     if (manticore <= 0 && city > 0)
     {
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("The Manticore has been destoryed!  This city of Consolas has been saved!");
+        Console.ResetColor();
     }
     else if (manticore > 0 && city <= 0)
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("You failed to detory the Manticore.  The city of Consolas has fallen!");
+        Console.ResetColor();
     }
     else
     {
-        Console.WriteLine("The Manticore and the city were destoried at the same time.  All is lost for both sides");
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("The Manticore and the city were destoried at the same time.  All is lost for both sides.");
+        Console.ResetColor();
     }
     Console.WriteLine(separator);
 }
