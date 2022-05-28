@@ -14,42 +14,43 @@ do
     int damage = 0;      
     string separator = "_________________________________________________________________________________";
 
-   //Player 1 sets up the game distance for the Manticore
+    
     int attackDistance = gameSteup(separator);
     
     Console.WriteLine("Player 2: It is your turn.");
 
-
     while (city > 0 && manticore > 0)
     {
         Console.WriteLine(separator);
-
-        // Pass to Status menu method
         statusMenu(round, city, manticore);
-
-        // Pass to Cannon method return expected damage
         int cannonFire = cannonInfo(damage, round);
-
-        // Pass to rangeSetting method
         int targetRange = rangeSetting();
+        int fireResults = fireInfo(targetRange, attackDistance, cannonFire);
 
-        //Start of place holder (REMOVE)
-        city -= 5;
+        //Round updates
+        city -= 1;
+        manticore -= fireResults;
         round++;
-        //End of place holder (REMOVE)
+              
     }
     
-    //add action once while loop is met
+    winCondition(manticore,city, separator);
 
     playGame = playAgain();
 } while (playGame);
+
+
+
 
 //-----Methods-----
 
 //Status menu method
 void statusMenu(int round, int city, int manticore)
 {
+
+    
     Console.WriteLine($"STATUS:  Round: {round}  City: {city}/15  Manticore: {manticore}/10");
+    
 }
 
 //Game set up method
@@ -79,9 +80,9 @@ int cannonInfo(int damage, int round)
     if (round % 3 == 0 && round % 5 == 0) damage = 10;
     else if (round % 3 == 0 || round % 5 == 0) damage = 3;
     else damage = 1;
-
-
+    
     Console.WriteLine($"The cannon is expected to deal {damage} damage this round.");
+    
     return damage;
 
 }
@@ -96,6 +97,43 @@ int rangeSetting()
 
 
 }
+int fireInfo(int targetRange, int attackDistance, int cannonFire)
+{
+    int damage = 0;
+    if (targetRange > attackDistance)
+    {
+        Console.WriteLine("That round OVERSHOT the target.");
+        return damage;
+    }
+    else if (targetRange < attackDistance)
+    {
+        Console.WriteLine("That round FELL SHORT of the target");
+        return damage;
+    }
+    else
+    {
+        Console.WriteLine("That round was a DIRECT HIT!");
+        return damage + cannonFire;
+    }
+}
+
+void winCondition(int manticore, int city, string separator)
+{
+    if (manticore <= 0 && city > 0)
+    {
+        Console.WriteLine("The Manticore has been destoryed!  This city of Consolas has been saved!");
+    }
+    else if (manticore > 0 && city <= 0)
+    {
+        Console.WriteLine("You failed to detory the Manticore.  The city of Consolas has fallen!");
+    }
+    else
+    {
+        Console.WriteLine("The Manticore and the city were destoried at the same time.  All is lost for both sides");
+    }
+    Console.WriteLine(separator);
+}
+
 
 // Replay game method
 bool playAgain()
